@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block page_content %}
+{#        <div class="jumbotron">#}
+        <img style="width: 100%"
+             src="https://www.hoteltoresela.it/wp-content/uploads/2013/04/windsurf.jpg" alt="">
+{#             src="https://activepets.co.za/web/ap-content/uploads/2019/08/Active-pets-dogs-and-cats.png" alt="">#}
+        <div class="position-sticky">
+            <h1 class="display-4">Explore nature as JUMP or FLY.</h1>
+            <p class="lead">Share your equipment for sale and check for spot.</p>
+            <hr class="my-4">
+            <div class="flex-row">
+
+                <!-- Login Button -->
+                <a href="{% url 'login user' %}" class="btn btn-lg btn-secondary">Login</a>
+
+                <!-- Register Button -->
+                <a href="{% url 'create profile' %}" class="btn btn-lg btn-secondary">Register</a>
+            </div>
+        </div>
+{#    </div>#}
+{% endblock %}

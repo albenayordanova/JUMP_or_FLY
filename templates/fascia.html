@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block page_content %}
+    {% if equip_photos %}
+        <h1 class='text-center'>equipment for sale</h1>
+        <div class="container mb-5">
+            <div class="row mb-5">
+                {% for equip_photo in equip_photos %}
+                    <div class="card ml-3 mb-3" style="width: 18rem;">
+                        <!-- Image -->
+                        <img src="{{ equip_photo.photo.url}}"
+                             class="card-img-top" alt="Photo description">
+                        <div class="card-body">
+                            {% for equip in equip_photo.tagged_equip.all %}
+                            <h5 class="card-title">{{ equip.brand }}</h5>
+                                <p class="mt-2">{{ equip.type }}</p>
+                                {% if equip.date_of_manufacture %}
+                                    <p class="mt-2">Date of manufacture: {{ equip.date_of_manufacture }}</p>
+                                {% endif %}
+                            {% endfor %}
+                            <!-- First 30 chars from the description -->
+{#                            <p class="card-text">{{ equip_photo.description|truncatechars:200}}</p>#}
+                            <!-- Button to the Photo Details Page -->
+                            <a href="{% url 'photo details' equip_photo.id %}" class="btn btn-primary">See details</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% else %}
+        <h1 class='text-center'>No equip photos yet</h1>
+        <div class=" row d-flex justify-content-center align-content-center">
+            <!-- Button to Add a new Photo -->
+            <a href="{% url 'create photo' %}" class="btn btn-lg btn-secondary row align-self-baseline">Add Photo</a>
+        </div>
+    {% endif %}
+{% endblock %}

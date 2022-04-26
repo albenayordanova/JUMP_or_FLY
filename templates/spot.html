@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block page_content %}
+    {% if spots %}
+        <h1 class='text-center'>check this place >>></h1>
+        <div class="container mb-5">
+            <div class="row mb-5">
+                {% for spot in spots %}
+                        {{ spot.name }}
+                    <div class="card ml-3 mb-3" style="width: 18rem;">
+                        <!-- Image -->
+                        <img src="{{ spot.picture }}.jpg"
+                             class="w-50 rounded mx-auto d-block" alt="description">
+
+                        {{ spot.description }}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+    <form action="{% url 'create spot' %}" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <button class="btn btn-primary mt-2" type="submit">Add Spot</button>
+    </form>
+{% endblock %}
