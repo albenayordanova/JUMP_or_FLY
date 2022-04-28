@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from jump.main_app.models import Equip, Photo
+from jump.main_app.models import Equip, Photo, Spot
 
 
 class EquipInlineAdmin(admin.StackedInline):
@@ -14,4 +14,9 @@ class EquipAdmin(admin.ModelAdmin):
 
 @admin.register(Photo)
 class PhotoAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(Spot)
+class SpotAdmin(admin.ModelAdmin):
     pass

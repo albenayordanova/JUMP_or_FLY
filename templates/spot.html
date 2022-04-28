@@ -5,13 +5,15 @@
         <div class="container mb-5">
             <div class="row mb-5">
                 {% for spot in spots %}
-                        {{ spot.name }}
                     <div class="card ml-3 mb-3" style="width: 18rem;">
                         <!-- Image -->
-                        <img src="{{ spot.picture }}.jpg"
-                             class="w-50 rounded mx-auto d-block" alt="description">
-
-                        {{ spot.description }}
+                        <img src="{{ spot.picture}}.jpg"
+                             class="card-img-top" alt="Photo description">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ spot.name }}</h5>
+                                <p class="mt-2">{{ spot.description|truncatechars:100 }}</p>
+                        </div>
+                    <a href="" class="btn btn-primary">See details</a>
                     </div>
                 {% endfor %}
             </div>

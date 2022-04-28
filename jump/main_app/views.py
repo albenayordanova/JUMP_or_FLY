@@ -76,8 +76,8 @@ class CreatePhotoView(LoginRequiredMixin, views.CreateView):
 
     def get_queryset(self):
     #     .filter(user=self.request.user)
-        return super().get_queryset().filter(user=self.request.user).prefetch_related('tagged_equip')
-    #     return Equip.objects.filter(user=self.request.user).prefetch_related('tagged_equip')
+    #     return super().get_queryset().filter(user=self.request.user).prefetch_related('tagged_equip')
+        return Equip.objects.prefetch_related('tagged_equip').filter(user=self.request.user)
 
     def form_valid(self, form):
         form.instance.user = self.request.user

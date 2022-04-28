@@ -17,9 +17,6 @@
                                     <p class="mt-2">Date of manufacture: {{ equip.date_of_manufacture }}</p>
                                 {% endif %}
                             {% endfor %}
-                            <!-- First 30 chars from the description -->
-{#                            <p class="card-text">{{ equip_photo.description|truncatechars:200}}</p>#}
-                            <!-- Button to the Photo Details Page -->
                             <a href="{% url 'photo details' equip_photo.id %}" class="btn btn-primary">See details</a>
                         </div>
                     </div>
