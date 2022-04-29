@@ -1,12 +1,12 @@
 import slug as slug
-from django.contrib.auth import logout, login
+from django.contrib.auth import login
 from django.views import generic as views
 from django.contrib.auth.views import LoginView, PasswordChangeView, LogoutView
 from django.urls import reverse_lazy
 
 from jump.auth_app.forms import CreateProfileForm
 from jump.auth_app.models import Profile
-from jump.common.view_mix import RedirectToFascia
+from jump.common.view_mixins import RedirectToFascia
 from jump.main_app.models import Equip, Photo
 
 
@@ -63,10 +63,8 @@ class ProfileDetailsView(views.DetailView):
         context = super().get_context_data(**kwargs)
         equips = list(Equip.objects.filter(user_id=self.object.user_id))
         photos = Photo.objects.filter(tagged_equip__in=equips).distinct()
-        total_photos_count = len(photos)
 
         context.update({
-            'total_photos_count': total_photos_count,
             'is_owner': self.object.user_id == self.request.user.id,
             'equips': equips,
         })
@@ -74,6 +72,5 @@ class ProfileDetailsView(views.DetailView):
 
 
 class UserLogoutView(LogoutView):
-
     template_name = 'home_page.html'
     success_url = reverse_lazy('home')

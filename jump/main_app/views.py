@@ -3,7 +3,7 @@ from django.urls import reverse_lazy
 from django.views import generic as views
 from django.shortcuts import render, redirect
 
-from jump.common.view_mix import RedirectToFascia
+from jump.common.view_mixins import RedirectToFascia
 from jump.main_app.forms import CreateEquipForm, EditEquipForm, \
     DeleteEquipForm, SpotForm
 from jump.main_app.models import Photo, Equip, Spot

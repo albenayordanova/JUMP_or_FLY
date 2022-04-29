@@ -1,3 +1,6 @@
+from django.shortcuts import redirect
+
+
 class BootstrapFormMixin:
     fields = {}
 
@@ -21,3 +24,10 @@ class DisabledFieldsFormMixin:
             if not hasattr(field.widget, 'attrs'):
                 setattr(field.widget, 'attrs', {})
             field.widget.attrs['readonly'] = 'readonly'
+
+
+class RedirectToFascia:
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return redirect('fascia')
+        return super().dispatch(request, *args, **kwargs)

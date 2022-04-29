@@ -6,7 +6,6 @@
                  class="w-100 rounded mx-auto d-block" alt="{{ equip_photo.description}}">
         </div>
         <div class="d-inline p-2 w-50">
-            <!-- Info for First Pet -->
             {% for equip in equip_photo.tagged_equip.all %}
             <div class="d-flex justify-content-around">
                 <h5><u>type:</u> {{ equip.type }}</h5>
