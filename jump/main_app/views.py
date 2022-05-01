@@ -22,6 +22,7 @@ class FasciaView(views.ListView):
     model = Photo
     template_name = 'fascia.html'
     context_object_name = 'equip_photos'
+    paginate_by = 3
 
 
 class CreateEquipView(views.CreateView):
