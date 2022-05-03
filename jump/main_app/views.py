@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.paginator import Paginator
 from django.urls import reverse_lazy
 from django.views import generic as views
 from django.shortcuts import render, redirect
@@ -103,12 +104,27 @@ class DeletePhotoView(views.DeleteView):
         return Photo.objects.filter(user=self.request.user)
 
 
+# class SpotView(views.ListView):
+#     form_class = SpotForm
+#     template_name = 'spot.html'
+#     paginate_by = 3
+#
+#     def get_queryset(self):
+#         return Spot.objects.all() ###
+
 def show_spot(request):
     spots = Spot.objects.all()
+    paginator = Paginator(spots, per_page=2)
+    current_page = request.GET.get('page', 1)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     context = {
         'spots': spots,
         'form': SpotForm(),
+        'spots_page': paginator.get_page(current_page),
+        'page_obj': page_obj,
     }
+
     return render(request, 'spot.html', context)
 
 
@@ -117,3 +133,9 @@ def create_spot(request):
     if form.is_valid():
         form.save()
         return redirect('spot')
+
+
+class SpotDetailsView(views.DetailView):
+    model = Spot
+    template_name = 'spot_details.html'
+

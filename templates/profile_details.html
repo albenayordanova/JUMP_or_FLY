@@ -12,7 +12,7 @@
                     <h5>{{ profile.first_name }} {{ profile.last_name }}</h5>
                     <h5>{{ profile.phone }}</h5>
                     {% if profile.email %}
-                         <h5>{{ profile.email }}</h5>
+                        <h5>{{ profile.email }}</h5>
                     {% endif %}
                 </div>
                 {% if is_owner %}
@@ -30,7 +30,7 @@
             {% for equip in equips %}
                 <div style="width: 18rem;">
 
-                <img src="{{ equip.photo }}.jpg"
+                    <img src="{{ equip.photo }}.jpg"
                          class="card-img-top" alt="Photo description">
 
                     <h5>{{ equip.brand }}</h5>
@@ -43,6 +43,25 @@
                     {% endif %}
                 </div>
             {% endfor %}
+
+        </div>
+        <div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
         </div>
     </div>
+
 {% endblock %}

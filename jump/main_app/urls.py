@@ -1,7 +1,7 @@
 from django.urls import path
 
 from jump.main_app.views import HomeView, FasciaView, PhotoDetailsView, CreateEquipView, EditEquipView, DeleteEquipView, \
-    CreatePhotoView, EditPhotoView, show_spot, create_spot, DeletePhotoView
+    CreatePhotoView, EditPhotoView, DeletePhotoView, SpotDetailsView, create_spot, show_spot
 
 urlpatterns = (
     path('', HomeView.as_view(), name='home'),
@@ -9,6 +9,7 @@ urlpatterns = (
 
     path('spot/', show_spot, name='spot'),
     path('spot/create/', create_spot, name='create spot'),
+    path('spot/details/<int:pk>/', SpotDetailsView.as_view(), name='spot details'),
 
     path('photo/details/<int:pk>/', PhotoDetailsView.as_view(), name='photo details'),
     path('photo/add/', CreatePhotoView.as_view(), name='create photo'),

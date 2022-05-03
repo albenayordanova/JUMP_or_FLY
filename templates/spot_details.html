@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block page_content %}
+    <div class="d-flex">
+        <div class="d-inline p-2 w-50">
+            <img src="{{ spot.picture}}.jpg"
+                             class="card-img-top" alt="Photo description">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ spot.name }}</h5>
+                                <p class="mt-2">{{ spot.description }}</p>
+                        </div>
+
+        </div>
+    </div>
+{% endblock %}
+

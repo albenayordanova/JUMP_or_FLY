@@ -4,7 +4,7 @@
         <h1 class='text-center'>check this place >>></h1>
         <div class="container mb-5">
             <div class="row mb-5">
-                {% for spot in spots %}
+                {% for spot in spots_page %}
                     <div class="card ml-3 mb-3" style="width: 18rem;">
                         <!-- Image -->
                         <img src="{{ spot.picture}}.jpg"
@@ -13,11 +13,29 @@
                             <h5 class="card-title">{{ spot.name }}</h5>
                                 <p class="mt-2">{{ spot.description|truncatechars:100 }}</p>
                         </div>
-                    <a href="" class="btn btn-primary">See details</a>
+                    <a href="{% url 'spot details' spot.pk %}" class="btn btn-primary">See details</a>
                     </div>
                 {% endfor %}
             </div>
+                <div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
         </div>
+        </div>
+
     {% endif %}
     <form action="{% url 'create spot' %}" method="post">
         {% csrf_token %}

@@ -58,6 +58,7 @@ class ProfileDetailsView(views.DetailView):
     model = Profile
     template_name = 'profile_details.html'
     context_object_name = 'profile'
+    paginate_by = 3
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
