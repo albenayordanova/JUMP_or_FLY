@@ -2,7 +2,7 @@ import slug as slug
 from django.contrib.auth import login
 from django.views import generic as views
 from django.contrib.auth.views import LoginView, PasswordChangeView, LogoutView
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 
 from jump.auth_app.forms import CreateProfileForm
 from jump.auth_app.models import Profile
@@ -10,10 +10,13 @@ from jump.common.view_mixins import RedirectToFascia
 from jump.main_app.models import Equip, Photo
 
 
-class UserRegisterView(RedirectToFascia, views.CreateView):
+class UserRegisterView(RedirectToFascia, views.CreateView): # test -> 2 custom behaviour
     form_class = CreateProfileForm
     template_name = 'profile_create.html'
     success_url = reverse_lazy('fascia')
+
+    # def get_success_url(self): # for test
+    #     return reverse('profile', kwargs={'pk': self.object.pk})
 
     def form_valid(self, *args, **kwargs):
         result = super().form_valid(*args, **kwargs)
@@ -54,7 +57,22 @@ class ChangeUserPasswordView(PasswordChangeView):
     template_name = 'change_password.html'
 
 
-class ProfileDetailsView(views.DetailView):
+class ProfilesListView(views.ListView): # for tests
+    model = Profile
+    template_name = 'profiles_list.html'
+    context_user_key = 'user'
+    no_logged_in_user_value = 'No user'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        if self.request.user.is_authenticated:
+            context[self.context_user_key] = self.request.user.username
+        else:
+            context[self.context_user_key] = self.no_logged_in_user_value
+        return context
+
+
+class ProfileDetailsView(views.DetailView): # tests mandatory
     model = Profile
     template_name = 'profile_details.html'
     context_object_name = 'profile'

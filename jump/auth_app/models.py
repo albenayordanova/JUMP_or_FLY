@@ -63,6 +63,10 @@ class Profile(models.Model):
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
 
+    @property
+    def full_name(self):
+        return f'{self.first_name} {self.last_name}'
+
     def delete(self, using=None, keep_parents=False):
         self.is_deleted = True
         return self.save()

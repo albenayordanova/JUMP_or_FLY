@@ -2,7 +2,7 @@ from django.core.exceptions import ValidationError
 from django.utils.deconstruct import deconstructible
 
 
-def only_letters_validator(value):
+def only_letters_validator(value): # tests mandatory
     for ch in value:
         if not ch.isalpha():
             raise ValidationError('Value must contain only letters')
@@ -10,7 +10,7 @@ def only_letters_validator(value):
 
 
 @deconstructible
-class ValidateFileMaxSizeInMb:
+class ValidateFileMaxSizeInMb: # tests mandatory
     def __init__(self, max_size):
         self.max_size = max_size
 

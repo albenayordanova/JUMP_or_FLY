@@ -1,7 +1,7 @@
 from django.shortcuts import redirect
 
 
-class BootstrapFormMixin:
+class BootstrapFormMixin: # tests
     fields = {}
 
     def _init_bootstrap_form_controls(self):
@@ -13,7 +13,7 @@ class BootstrapFormMixin:
             field.widget.attrs['class'] += 'form-control'
 
 
-class DisabledFieldsFormMixin:
+class DisabledFieldsFormMixin: # tests
     disabled_fields = '__all__'
     fields = {}
 
@@ -26,7 +26,7 @@ class DisabledFieldsFormMixin:
             field.widget.attrs['readonly'] = 'readonly'
 
 
-class RedirectToFascia:
+class RedirectToFascia: # tests
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated:
             return redirect('fascia')

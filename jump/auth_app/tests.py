@@ -13,14 +13,14 @@ UserModel = get_user_model()
 class ProfileDetailsViewTests(TestCase):
     VALID_USER_CREDENTIALS = {
         'username': 'testuser',
-        'password': '_XAP22PA5yCv.xh1'
+        'password': '_XAP22PA5yCv.xh1',
     }
 
     VALID_PROFILE_DATA = {
         'first_name': 'Test',
         'last_name': 'User',
         'picture': 'http://test.picture/url.png',
-        'date_of_birth': date(2000, 7, 23)
+        # 'date_of_birth': date(2000, 7, 23)
     }
 
     VALID_EQUIP_DATA = {
