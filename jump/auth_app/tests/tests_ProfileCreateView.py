@@ -22,7 +22,7 @@ class ProfileCreateViewTests(TestCase):
     def __create_user(self, **credentials):
         return UserModel.objects.create_user(**credentials)
 
-    def test_create_profile__when_all_valid__expect_to_create(self):
+    def test_create_profile__when_all_valid__expect_to_create(self): ###
            # user_data = {
         #     'username': 'testuser',
         #     'password': '_XAP22PA5yCv.xh1',
@@ -39,7 +39,7 @@ class ProfileCreateViewTests(TestCase):
         self.assertEqual(self.VALID_PROFILE_DATA['picture'], profile.picture)
         self.assertEqual(self.VALID_PROFILE_DATA['phone'], profile.phone)
 
-    def test_create_profile__when_all_valid__expect_to_redirect_to_fascia(self):
+    def test_create_profile__when_all_valid__expect_to_redirect_to_fascia(self): ###
         response = self.client.post(
             reverse('create profile'),
             data=self.VALID_PROFILE_DATA,

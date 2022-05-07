@@ -20,7 +20,7 @@ class ProfileDetailsViewTests(TestCase):
         'first_name': 'Test',
         'last_name': 'User',
         'picture': 'http://test.picture/url.png',
-        # 'date_of_birth': date(2000, 7, 23)
+        'phone': '0888123456',
     }
 
     VALID_EQUIP_DATA = {
@@ -64,18 +64,18 @@ class ProfileDetailsViewTests(TestCase):
         response = self.client.get(reverse('profile', kwargs={'pk': 1, }))
         self.assertEqual(404, response.status_code)
 
-    def test_expect_correct_template(self): ###
+    def test_expect_correct_template(self):  ###
         user, profile = self.__create_valid_user_and_profile()
         self.__get_response_for_profile(profile)
         self.assertTemplateUsed('profile_details.html')
 
-    def test_when_user_is_owner__expect_is_owner_to_be_true(self): ###
+    def test_when_user_is_owner__expect_is_owner_to_be_true(self):
         user, profile = self.__create_valid_user_and_profile()
         self.client.login(**self.VALID_USER_CREDENTIALS)
         response = self.__get_response_for_profile(profile)
         self.assertTrue(response.context['is_owner'])
 
-    def test_when_user_is_not_owner__expect_is_owner_to_be_false(self): ###
+    def test_when_user_is_not_owner__expect_is_owner_to_be_false(self):
         user, profile = self.__create_valid_user_and_profile()
         credentials = {
             'username': 'testuser2',
@@ -86,7 +86,7 @@ class ProfileDetailsViewTests(TestCase):
         response = self.__get_response_for_profile(profile)
         self.assertFalse(response.context['is_owner'])
 
-    def test_when_user_has_equips__expect_to_return_only_users_equips(self):  ###yes
+    def test_when_user_has_equips__expect_to_return_only_users_equips(self):
         user, profile = self.__create_valid_user_and_profile()
         credentials = {
             'username': 'testuser2',
@@ -94,6 +94,7 @@ class ProfileDetailsViewTests(TestCase):
         }
         user2 = self.__create_user(**credentials)
         equip, photo = self.__create_equip_and_photo_for_user(user)
+        # Create equip for different user
         self.__create_equip_and_photo_for_user(user2)
         response = self.__get_response_for_profile(profile)
         self.assertEqual(
