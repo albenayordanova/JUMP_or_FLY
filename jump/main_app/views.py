@@ -60,12 +60,12 @@ class PhotoDetailsView(LoginRequiredMixin, views.DetailView):
     template_name = 'photo_details.html'
     context_object_name = 'equip_photo'
 
-    def dispatch(self, request, *args, **kwargs):
-        response = super().dispatch(request, *args, **kwargs)
-        viewed_photos = request.session.get('last_viewed_photo_ids', [])
-        viewed_photos.insert(0, self.kwargs['pk'])
-        request.session['last_viewed_photo_ids'] = viewed_photos[:5]
-        return response
+    # def dispatch(self, request, *args, **kwargs):
+    #     response = super().dispatch(request, *args, **kwargs)
+    #     viewed_photos = request.session.get('last_viewed_photo_ids', [])
+    #     viewed_photos.insert(0, self.kwargs['pk'])
+    #     request.session['last_viewed_photo_ids'] = viewed_photos[:5]
+    #     return response
 
     def get_queryset(self):
         return super().get_queryset().prefetch_related('tagged_equip')

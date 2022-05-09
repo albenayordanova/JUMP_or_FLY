@@ -40,8 +40,8 @@ class EditProfileView(views.UpdateView):
     template_name = 'profile_edit.html'
     # success_url = reverse_lazy('profile') #
     fields = ('first_name', 'last_name', 'picture', 'phone', 'email')
-    slug_field = 'username'
-    slug_url_kwarg = 'slug'
+    # slug_field = 'username'
+    # slug_url_kwarg = 'slug'
 
     # def get_queryset(self):
     #     return Profile.objects.filter(user=self.request.user)
