@@ -68,13 +68,23 @@ WSGI_APPLICATION = 'jump.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'jump_db',
+#         'USER': 'postgres',
+#         'PASSWORD': 'postgres',
+#         'HOST': '127.0.0.1',
+#         'PORT': '5432',
+#     }
+# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'jump_db',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': '127.0.0.1',
+        'NAME': 'd4nt01tnkvp0gd',
+        'USER': 'nzhxbzuylxhgac',
+        'PASSWORD': '781c81473218a519487f2e35c17ad3104c6f8f5b4db70cc3151d5d79da769b44',
+        'HOST': 'ec2-176-34-211-0.eu-west-1.compute.amazonaws.com',
         'PORT': '5432',
     }
 }
