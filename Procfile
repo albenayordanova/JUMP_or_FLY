@@ -1,2 +1,2 @@
-web: gunicorn --pythonpath jump jump.wsgi
-release: python jump/manage.py migrate
+web: gunicorn jump.wsgi
+release: python manage.py migrate
