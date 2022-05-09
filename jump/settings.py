@@ -43,8 +43,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'jump.common.middlewares.count_user_clicks_middleware',
-    'jump.common.middlewares.last_viewed_photo_middleware',
+    # 'jump.common.middlewares.count_user_clicks_middleware',
+    # 'jump.common.middlewares.last_viewed_photo_middleware',
 ]
 
 ROOT_URLCONF = 'jump.urls'
