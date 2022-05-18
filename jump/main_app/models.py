@@ -1,3 +1,4 @@
+from cloudinary import models as cloudinary_models
 from django.contrib.auth import get_user_model
 from django.db import models
 
@@ -42,14 +43,15 @@ class Equip(models.Model):
 
 
 class Photo(models.Model):
-    IMAGE_MAX_SIZE_IN_MB = 5
-    IMAGE_UPLOAD_TO_DIR = 'images/'
-    photo = models.ImageField(
-        upload_to=IMAGE_UPLOAD_TO_DIR,
-        validators=(
-            ValidateFileMaxSizeInMb(IMAGE_MAX_SIZE_IN_MB),
-        ),
-    )
+    # IMAGE_MAX_SIZE_IN_MB = 5
+    # IMAGE_UPLOAD_TO_DIR = 'images/'
+    photo = cloudinary_models.CloudinaryField('image')
+    # photo = models.ImageField(
+    #     upload_to=IMAGE_UPLOAD_TO_DIR,
+    #     validators=(
+    #         ValidateFileMaxSizeInMb(IMAGE_MAX_SIZE_IN_MB),
+    #     ),
+    # )
     description = models.TextField(
         null=True,
         blank=True,
