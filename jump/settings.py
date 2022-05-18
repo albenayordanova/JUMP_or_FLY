@@ -14,11 +14,13 @@ SECRET_KEY = 'django-insecure-b(+xfy*_8^z!%ox4y3!7gsx%9x=b-8aolk(s^dm!he+pjcdnco
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = [
-    'localhost',
-    '127.0.0.1',
-    'jump-2022-05.herokuapp.com',
-]
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(' ')
+print(ALLOWED_HOSTS)
+# [
+#     'localhost',
+#     '127.0.0.1',
+#     'jump-2022-05.herokuapp.com',
+# ]
 
 
 # Application definition
