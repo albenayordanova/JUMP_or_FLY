@@ -2,6 +2,8 @@ import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+from jump.utils import is_production
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -9,7 +11,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-b(+xfy*_8^z!%ox4y3!7gsx%9x=b-8aolk(s^dm!he+pjcdnco'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
@@ -72,15 +74,15 @@ TEMPLATES = [
 WSGI_APPLICATION = 'jump.wsgi.application'
 
 DATABASES = None
-if APP_ENVIRONMENT == 'Production':
+if is_production():
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'd4ddqk9j2o9c2c',
-            'USER': 'jyxlwqodspckdm',
-            'PASSWORD': 'df4401dbf2267ed7ef6aec9a8beaa62557c2273159c3fef880014dad12cb4d0f',
-            'HOST': 'ec2-52-30-159-47.eu-west-1.compute.amazonaws.com',
-            'PORT': '5432',
+            'NAME': os.getenv('DB_NAME'),
+            'USER': os.getenv('DB_USER'),
+            'PASSWORD': os.getenv('DB_PASSWORD'),
+            'HOST': os.getenv('DB_HOST'),
+            'PORT': os.getenv('DB_PORT', '5432'),
         }
     }
 else:
@@ -95,25 +97,26 @@ else:
         }
     }
 
-print(DATABASES)
-
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
-]
+AUTH_PASSWORD_VALIDATORS = []
+
+if is_production():
+    AUTH_PASSWORD_VALIDATORS.extend([
+        {
+            'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        },
+        {
+            'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        },
+        {
+            'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        },
+        {
+            'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        },
+    ])
 
 
 # Internationalization
