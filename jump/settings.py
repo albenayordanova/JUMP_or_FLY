@@ -13,9 +13,9 @@ SECRET_KEY = 'django-insecure-b(+xfy*_8^z!%ox4y3!7gsx%9x=b-8aolk(s^dm!he+pjcdnco
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
+APP_ENVIRONMENT = os.getenv('APP_ENVIRONMENT')
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(' ')
-print(ALLOWED_HOSTS)
 # [
 #     'localhost',
 #     '127.0.0.1',
@@ -71,31 +71,31 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'jump.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'jump_db',
-#         'USER': 'postgres',
-#         'PASSWORD': 'postgres',
-#         'HOST': '127.0.0.1',
-#         'PORT': '5432',
-#     }
-# }
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'd4ddqk9j2o9c2c',
-        'USER': 'jyxlwqodspckdm',
-        'PASSWORD': 'df4401dbf2267ed7ef6aec9a8beaa62557c2273159c3fef880014dad12cb4d0f',
-        'HOST': 'ec2-52-30-159-47.eu-west-1.compute.amazonaws.com',
-        'PORT': '5432',
+DATABASES = None
+if APP_ENVIRONMENT == 'Production':
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'd4ddqk9j2o9c2c',
+            'USER': 'jyxlwqodspckdm',
+            'PASSWORD': 'df4401dbf2267ed7ef6aec9a8beaa62557c2273159c3fef880014dad12cb4d0f',
+            'HOST': 'ec2-52-30-159-47.eu-west-1.compute.amazonaws.com',
+            'PORT': '5432',
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'jump_db',
+            'USER': 'postgres',
+            'PASSWORD': 'postgres',
+            'HOST': '127.0.0.1',
+            'PORT': '5432',
+        }
+    }
 
+print(DATABASES)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
