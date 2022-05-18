@@ -86,10 +86,10 @@ WSGI_APPLICATION = 'jump.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'd4nt01tnkvp0gd',
-        'USER': 'nzhxbzuylxhgac',
-        'PASSWORD': '781c81473218a519487f2e35c17ad3104c6f8f5b4db70cc3151d5d79da769b44',
-        'HOST': 'ec2-176-34-211-0.eu-west-1.compute.amazonaws.com',
+        'NAME': 'd4ddqk9j2o9c2c',
+        'USER': 'jyxlwqodspckdm',
+        'PASSWORD': 'df4401dbf2267ed7ef6aec9a8beaa62557c2273159c3fef880014dad12cb4d0f',
+        'HOST': 'ec2-52-30-159-47.eu-west-1.compute.amazonaws.com',
         'PORT': '5432',
     }
 }
